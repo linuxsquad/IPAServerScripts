@@ -7,6 +7,7 @@
 # DESCRIPTION:    connect to IPA/DNS to find out A records w/out corresponding PTRs, adding missing PTRs
 #
 # PRE-REQUISIT:   - IPA server with DNS plugin enabled
+#                 - Get IPA admin credential since script needs ADMIN right to perform instructions
 #                 - all ARPA zones (relevant to your installastion) should be created in DNS 
 #                   prior to running this scrupt. Otherwise the script fails.
 #                 - This script does not detect subnet CLASS (A,B,C ) in fully automated way (anyone?). 
@@ -23,7 +24,7 @@
 # change to your subnet, IPA/DNS does handle subnet by its CLASS
 typeset OFFICESUBNET="2.168.192"
 typeset CLOUDSUBNET="25.172"
-typeset CORPDOMAIN="exmaple.lan"
+typeset CORPDOMAIN="example.lan"
 
 ipa dnsrecord-find ${CORPDOMAIN} | egrep "name: [a-z]" | cut -d':' -f2 | while read name
 do 
